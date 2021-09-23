@@ -1,0 +1,20 @@
+
+
+Add Spring Security :----
+Steps
+1.make customUserDetail class which implements UserDetails interface
+2.override all the methods and implement methods which you required
+3.make a model class JwtRequest which have user-name and password properties for handling user request
+4.make a model class JwtResponse which have token property for sending token as Response
+5.make a class UserDetailServiceImpl which extends UserDetailService class and override the method loadByUsername
+  this method uses findByusername method of userRepository for finding the user from the database
+6.Make a configuration class which extends WebSecurityConfigurerAdapter and override the two methods
+  -->config(AuthenticationManager auth) this method internally called when spring fetch the user
+  -->config(HttpSecurity security)  this method is used to check the user is authenticated for that request or not
+7. make a class JwtAuthenticationEntryPoint which implements AuthenticationEntryPoint interface and override the
+method commence which is responsible to send error message when the user is not authenticated
+8.make a jwtutil class and copy that from the google
+  this class have all the methods to check that token is expire or not, token is valid or not etc...
+9.make a class JwtAthenticationFilter which extends OncePerRequest class for filtering the request , and 
+override the method doFilterInternal then validate the user and token.
+10. final make authentication controller for generating token  
